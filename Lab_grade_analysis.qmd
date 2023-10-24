@@ -53,7 +53,8 @@ knitr::kable(nb_per_grp)
 
 ## Question 6 :
 ```{r}
-ggplot(nb_per_grp, aes(x=N))+geom_bar()
+grades |> group_by(Group)|>
+  ggplot(aes(x=Group))+geom_bar()
 ```
 
 
