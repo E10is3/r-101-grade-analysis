@@ -17,13 +17,31 @@ library(ggplot2)
 ## Question 1 :
 
 ```{r}
+#| echo: false
+#| message: false
 grades <- vroom(here("grades.csv"),delim = ",")
 ```
 
 ## Question 2 :
 
 ```{r}
+#| echo: false
+#| message: false
 grades |> summarise(Min = min(Exam,na.rm=TRUE),Max =max(Exam,na.rm=TRUE),Median =median(Exam,na.rm=TRUE),Mean =mean(Exam,na.rm=TRUE))|>
 knitr::kable()
 ```
+## Question 3 :
+```{r}
+#| echo: false
+#| message: false
+absents <- grades |> count(Exam==NA)
+```
+
+`r absents$n` students did not attend to the final exam.
+
+
+
+
+
+
 
