@@ -45,7 +45,11 @@ exam <- grades|>
   filter(Exam != is.na(Exam))
 ggplot(exam, aes(x=Exam))+geom_histogram(bins = 40)+geom_rug(alpha=0.02)
 ```
-
+## Question 5 :
+```{r}
+nb_per_grp <- grades |> group_by(Group)|> summarize(N=n()) 
+knitr::kable(nb_per_grp)
+```
 
 
 
