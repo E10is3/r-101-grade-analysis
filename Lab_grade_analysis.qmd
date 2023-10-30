@@ -82,4 +82,10 @@ Missed <- grades |>
 knitr::kable(Missed)
 ```
 
+## Question 9 :
+```{r}
+Missed |>
+  ggplot(aes(x=Group, y=N))+geom_col()+ theme(axis.text.x=element_text(angle = 90, hjust = 0))
+```
+
 
