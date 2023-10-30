@@ -37,13 +37,13 @@ knitr::kable()
 absents <- grades |> count(is.na(Exam))
 ```
 
-`r absents$TRUE` students did not attend to the final exam.
+`r absents$n[2]` students did not attend to the final exam.
 
 ## Question 4 :
 ```{r}
 exam <- grades|>
   filter(Exam != is.na(Exam))
-ggplot(exam, aes(x=Exam))+geom_histogram(bins = 40)+geom_rug(alpha=0.02)
+ggplot(exam, aes(x=Exam))+geom_histogram(bins = 30)+geom_rug(alpha=0.02)
 ```
 ## Question 5 :
 ```{r}
@@ -54,9 +54,24 @@ knitr::kable(nb_per_grp)
 ## Question 6 :
 ```{r}
 grades |> group_by(Group)|>
-  ggplot(aes(x=Group))+geom_bar()
+  ggplot(aes(x=Group))+geom_bar()+ theme(axis.text.x=element_text(angle = 90, hjust = 0))
 ```
+## Question 7 :
+Here are tree representations of the distribution of the grades at the exam conditioned by the group. The challenge here is to be able to compare all the groups while preventing the graphical representations from being unreadable.
+```{r}
+ggplot(exam, aes(x=Exam, group = Group, color= Group))+geom_density()
 
+```
+This density representation is not really detailed but still allows us to see that even if there is a global tendency, the groups are far from being uniform, some pic around 3 while other pic around 10. The group 21 stands out with much better results.
+```{r}
+ggplot(exam, aes(x=Exam, group = Group, fill= Group))+geom_histogram(bins=50)+facet_wrap(~Group)
 
+```
+This second one is the more detailed one and allows to see the difference in distribution between the group, but it may be a bit complicated to compare them precisely and to read them.
+
+```{r}
+ggplot(exam, aes(x=Exam,y = Group,fill=Group))+geom_boxplot()
+```
+My preference goes for this third representation. I think that when comparing a large number of sub parts of the observations, box plot constitutes a good compromise between details and simplicity, and is the easiest to read.
 
 
