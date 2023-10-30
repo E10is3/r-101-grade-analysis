@@ -74,4 +74,12 @@ ggplot(exam, aes(x=Exam,y = Group,fill=Group))+geom_boxplot()
 ```
 My preference goes for this third representation. I think that when comparing a large number of sub parts of the observations, box plot constitutes a good compromise between details and simplicity, and is the easiest to read.
 
+## Question 8 :
+```{r}
+Missed <- grades |> 
+  mutate("missed" =is.na(Exam))|>
+  group_by(Group) |> summarise(N=sum(missed))
+knitr::kable(Missed)
+```
+
 
