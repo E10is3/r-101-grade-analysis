@@ -126,6 +126,17 @@ nb_missed_per_student <- grades_long |> mutate("missed" =is.na(value))|>
 nb_missed_per_student |>
   ggplot(aes(x=N))+geom_bar()+xlab("Number of missing grades per student")+ylab("Number of students")
 ```
+## Question 13 :
+
+```{r}
+#| echo: false
+#| message: false
+Missed2 <- grades_long |> filter (name == "Exam") |>
+  mutate("missed" =is.na(value))|>
+  group_by(Group) |> summarise(N=sum(missed))
+knitr::kable(Missed2)
+```
+
 
 
 
