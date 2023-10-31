@@ -110,4 +110,11 @@ Missed |>
 grades_long <- grades %>% pivot_longer(cols =(c("Exam":"Online_MCQ_19")))
 ```
 
+## Question 11 :
+```{r}
+#| echo: false
+#| message: false
+nb_missed_per_student <- grades_long |> mutate("missed" =is.na(value))|>
+  group_by(Id) |> summarise(N=sum(missed))
+```
 
