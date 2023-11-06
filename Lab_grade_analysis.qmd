@@ -12,6 +12,7 @@ library(vroom)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(stringr)
 ```
 
 ## Question 1 :
@@ -137,6 +138,15 @@ Missed2 <- grades_long |> filter (name == "Exam") |>
 knitr::kable(Missed2)
 ```
 
+## Question 14 :
+
+```{r}
+#| echo: false
+#| message: false
+nb_missed_online <- grades_long |> filter(str_starts(name,"Online"))|> 
+  mutate("missed" =is.na(value))|> group_by(Id) |> summarise(N=sum(missed))
+knitr::kable(nb_missed_online)
+```
 
 
 
