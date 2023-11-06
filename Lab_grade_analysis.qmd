@@ -171,3 +171,10 @@ nb_missed_MCQ <- grades_long |> filter(str_starts(name,"MCQ"))|>
   mutate("missed"= N>0)|> select(-N)
 knitr::kable(nb_missed_MCQ)
 ```
+
+## Question 17 :
+```{r}
+#| echo: false
+#| message: false
+p_missed_group <- inner_join(grades|> select(Id,Group), nb_missed_MCQ)|> group_by(Group)|> summarise(p_missed =(sum(missed)/n()*100))
+```
