@@ -69,7 +69,6 @@ Here are tree representations of the distribution of the grades at the exam cond
 #| echo: false
 #| message: false
 ggplot(exam, aes(x=Exam, group = Group, color= Group))+geom_density()
-
 ```
 This density representation is not really detailed but still allows us to see that even if there is a global tendency, the groups are far from being uniform, some pic around 3 while other pic around 10. The group 21 stands out with much better results.
 ```{r}
@@ -153,7 +152,6 @@ knitr::kable(nb_missed_online)
 #| echo: false
 #| message: false
 ggplot(df15, aes(x=Exam, group = N, color= N))+geom_density()+geom_rug(alpha=0.1)
-
 ```
 
 ```{r}
@@ -164,4 +162,12 @@ ggplot(df15,aes(x=Exam, group=N, y=N, fill=N))+geom_boxplot()
 ```
 We can plot the density using curves first to see if there is a general tendency, and then using boxplot to compare the performance at the exam more easily. We can see that the students that missed 3 or less online test get better grade on average than students that missed 10 or more tests, but this relationship is not linear.
 
-
+## Question 16 :
+```{r}
+#| echo: false
+#| message: false
+nb_missed_MCQ <- grades_long |> filter(str_starts(name,"MCQ"))|> 
+  mutate("miss" =is.na(value))|> group_by(Id) |> summarise(N=sum(miss))|>
+  mutate("missed"= N>0)|> select(-N)
+knitr::kable(nb_missed_MCQ)
+```
