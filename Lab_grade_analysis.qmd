@@ -148,16 +148,12 @@ knitr::kable(nb_missed_online)
 ```
 
 ## Question 15 :
-```{r}
-#| echo: false
-#| message: false
-ggplot(df15, aes(x=Exam, group = N, color= N))+geom_density()+geom_rug(alpha=0.1)+scale_color_viridis_c()
-```
 
 ```{r}
 #| echo: false
 #| message: false
 df15 <- inner_join(grades, nb_missed_online)|>filter(Exam != is.na(Exam))
+ggplot(df15, aes(x=Exam, group = N, color= N))+geom_density()+geom_rug(alpha=0.1)+scale_color_viridis_c()
 ggplot(df15,aes(x=Exam, group=N, y=N, fill=N))+geom_boxplot()+scale_fill_viridis_c()
 ```
 We can plot the density using curves first to see if there is a general tendency, and then using boxplot to compare the performance at the exam more easily. We can see that the students that missed 3 or less online test get better grade on average than students that missed 10 or more tests, but this relationship is not linear.
@@ -194,4 +190,4 @@ df18 <- inner_join(mean_group,p_missed_group)
 ggplot(df18, aes(x = p_missed, y= average))+geom_point(alpha = 0.5)
 ```
 
-It seems to be a negative correlation between the average of the grades obtained in a group and it percentage of missed MCQ_xx grades. This correlation isn't very clear.
+It seems to be a negative correlation between the average of the grades obtained in a group and it percentage of missed MCQ_xx grades but this correlation isn't very clear.
